@@ -30,7 +30,10 @@ class Solution2:
                 l += 1
             elif nums[curr] == 2:  # 2, move to the right side
                 nums[curr], nums[r] = nums[r], nums[curr]
-                # still confused why we don't move curr forward???
+                # KEY POINT
+                # 0s and 1s will be in order on the left of curr
+                # But we NEVER KNOW what curr pointer GET after switch 2 with r
+                # Then we should not curr + 1, we should stay and check whether curr is still 2 or not
                 r -= 1
             else:  # 1, we skip, move curr forward
                 curr += 1
