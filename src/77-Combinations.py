@@ -7,6 +7,7 @@ class Solution:
         def backtrack(n, k, start_index):
             # path is filled, no more num to pick, add to result and return
             if len(path) == k:
+                # add copy of the path, not original reference of it
                 res.append(path[:])
                 return
             # still need to pick more numbers for path
