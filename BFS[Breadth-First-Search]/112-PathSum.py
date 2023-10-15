@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    """BFS Board First Search (deque)"""
+    """BFS[Breadth-First-Search] (deque)"""
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         # pop left, append right
         # queue nodes stores node, cnts stores current path sum

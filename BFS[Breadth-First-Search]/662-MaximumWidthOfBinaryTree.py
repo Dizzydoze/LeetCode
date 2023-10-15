@@ -7,8 +7,8 @@ class TreeNode:
 
 
 class Solution:
+    """BFS[Breadth-First-Search]"""
     def widthOfBinaryTree(self, root):
-        # BFS: breadth first search
         # mark node index, left * 2, right * 2 + 1
         # width will be right - left + 1
         width = 1

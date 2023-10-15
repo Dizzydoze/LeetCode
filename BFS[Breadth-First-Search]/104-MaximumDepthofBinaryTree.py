@@ -9,7 +9,7 @@ import collections
 
 class Solution:
     def maxDepth(self, root):
-        # BFS
+        # BFS[Breadth-First-Search]
         if not root:
             return 0
         depth = 0
