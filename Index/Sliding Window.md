@@ -1,0 +1,4 @@
+| Problem                                                                                                                                        | Solution | Difficulty | Value |
+|------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------|-------|
+| [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) | .        | Medium     ||
+| [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/description/)             |          | Medium     |       |
