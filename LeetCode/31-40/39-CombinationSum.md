@@ -38,43 +38,50 @@ These are the only two combinations.
 * All elements of `candidates` are **distinct**.
 * `1 <= target <= 40`
 
-## Solution
+
+## Pattern
+1. SUM: intuition to do **deduction** with **remainder**.
+2. startIndex: always use it to **skip** previous elements at **CURRENT LEVEL**
+3. reused: for current number, all the recursion **set(candidates)** stays the same.
+4. leave cutting: remain < 0, combination exceeds target.
+
+## Backtracking(elements reused)
 
 ```python
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        """DFS, Backtracking, Target - Current, Begin index avoid repetition"""
-
-        # candidates: can be used unlimited times, always the same
-        # target: will be udpated to (target - current num) 
-        # begin: skip all the previous elements at the same level, which has been calculated before
-        def dfs(candidates, target, begin, path):
-            # sorted candidates, no need to check the next bigger num
-            if target < 0:
+        # backtracking
+        # sum: intuition should be deduction using remainder
+        # startIndex: always use it to skip previous elements at CURRENT LEVEL
+        def backtrack(remain, path, start):
+            # combination exceeds the target
+            if remain < 0:
                 return
-            # match found, add path to res
-            if target == 0:
-                res.append(path)
-                return
-            # traverse on current level, skip the previous number, start at begin index
-            #        2
-            #   /   /  \   \
-            #  2   3    6   7
-            # when we start at 3, only need to check 3, 6, 7, begin index = 1
-            # because results of 2 has been recorded
-            for i in range(begin, n):
-                # end the loop at current level, no need to check bigger nums
-                if target - candidates[i] < 0:
+            # base case: target combination found
+            if remain == 0:
+                res.append(path.copy())
+            # combination sum still < target
+            for i in range(start, len(candidates)):
+                # leave cutting, must sort the candidates, no need to check bigger nums
+                if remain - candidates[i] < 0:
                     break
-                # a copy of new path contains current element
-                # target - candidates[i]: the new target we're looking for
-                # i: current index, avoid next dfs to check the previous elements before this one
-                dfs(candidates, target - candidates[i], i, path + [candidates[i]])
+                path.append(candidates[i])
 
-        res = list()
-        # sort, when target - current < 0, no need to check bigger number, break
+                # KEY: startIndex doesn't change, elements can be reused
+                backtrack(remain - candidates[i], path, i)
+                path.pop()
+
+        res = []
         candidates.sort()
-        n = len(candidates)
-        dfs(candidates, target, 0, [])
+        # 1. start from target, do deduction on the way
+        # 2. traverse on CURRENT LEVEL, skip the previous number, start at begin index
+        #        2
+        #   /   /  \   \
+        #  2   3    6   7
+        # when we start at 3, only need to check 3, 6, 7, begin index = 1
+        # because results of 2 has been recorded
+        # 3. for each round, the candidates stay the same(reusage)
+        backtrack(target, [], 0)
         return res
+
 ```
